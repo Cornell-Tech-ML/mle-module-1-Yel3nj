@@ -115,7 +115,7 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
 
     for var in topo_order:
         if var.is_leaf():
-            var.accumulate_derivative(gradient_map.get(var.unique_id, 0.0)) 
+            var.accumulate_derivative(gradient_map.get(var.unique_id, 0.0))
 
 
 @dataclass

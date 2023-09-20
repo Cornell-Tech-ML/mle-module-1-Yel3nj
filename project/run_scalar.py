@@ -14,7 +14,7 @@ class Network(minitorch.Module):
         self.layer2 = Linear(hidden_layers, hidden_layers)
         self.layer3 = Linear(hidden_layers, 1)
 
-    def forward(self, x): # type: ignore
+    def forward(self, x):  # type: ignore
         middle = [h.relu() for h in self.layer1.forward(x)]  # type: ignore
         end = [h.relu() for h in self.layer2.forward(middle)]  # type: ignore
         return self.layer3.forward(end)[0].sigmoid()  # type: ignore

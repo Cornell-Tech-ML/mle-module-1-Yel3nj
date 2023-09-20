@@ -163,14 +163,12 @@ class Scalar:
         assert h.last_fn is not None
         assert h.ctx is not None
 
-        local_gradients = h.last_fn.backward(h.ctx, d_output) #  type: ignore
+        local_gradients = h.last_fn.backward(h.ctx, d_output)  # type: ignore
 
         if not isinstance(local_gradients, tuple):
             local_gradients = (local_gradients,)
 
-        variable_gradient_pairs = [\
-        (var, grad) for var, grad in zip(h.inputs, local_gradients) if not var.is_constant()\
-        ]
+        variable_gradient_pairs = [(var, grad) for var, grad in zip(h.inputs, local_gradients) if not var.is_constant()]
 
         return variable_gradient_pairs
 

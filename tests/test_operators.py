@@ -181,8 +181,8 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     """
     s = 0
     for i in range(len(ls1)):
-        s += ls1[i]  #type: ignore
-        s += ls2[i]  #type: ignore
+        s += ls1[i]  # type: ignore
+        s += ls2[i]  # type: ignore
     assert_close(sum(ls1) + sum(ls2), s)
 
 
