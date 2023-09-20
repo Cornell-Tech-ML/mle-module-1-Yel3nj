@@ -3,7 +3,6 @@ Be sure you have minitorch installed in you Virtual Env.
 >>> pip install -Ue .
 """
 import random
-from typing import Any, Iterable, List, Tuple, Union
 
 import minitorch
 
@@ -16,15 +15,15 @@ class Network(minitorch.Module):
         self.layer3 = Linear(hidden_layers, 1)
 
     def forward(self, x): # type: ignore
-        middle = [h.relu() for h in self.layer1.forward(x)] # type: ignore
-        end = [h.relu() for h in self.layer2.forward(middle)]# type: ignore
-        return self.layer3.forward(end)[0].sigmoid() # type: ignore
+        middle = [h.relu() for h in self.layer1.forward(x)]  # type: ignore
+        end = [h.relu() for h in self.layer2.forward(middle)]  # type: ignore
+        return self.layer3.forward(end)[0].sigmoid()  # type: ignore
 
 
 class Linear(minitorch.Module):
     def __init__(self, in_size: int, out_size: int) -> None:
         super().__init__()
-        self.weights = [] # type: ignore
+        self.weights = []  # type: ignore
         self.bias = []
         for i in range(in_size):
             self.weights.append([])
@@ -58,12 +57,12 @@ class ScalarTrain:
         self.hidden_layers = hidden_layers
         self.model = Network(self.hidden_layers)
 
-    def run_one(self, x): #type: ignore
-        return self.model.forward( #type: ignore
+    def run_one(self, x):  # type: ignore
+        return self.model.forward(  # type: ignore
             (minitorch.Scalar(x[0], name="x_1"), minitorch.Scalar(x[1], name="x_2"))
         )
 
-    def train(self, data, learning_rate, max_epochs=500, log_fn=default_log_fn): #type: ignore
+    def train(self, data, learning_rate, max_epochs=500, log_fn=default_log_fn):  # type: ignore
         self.learning_rate = learning_rate
         self.max_epochs = max_epochs
         self.model = Network(self.hidden_layers)
@@ -82,7 +81,7 @@ class ScalarTrain:
                 y = data.y[i]
                 x_1 = minitorch.Scalar(x_1)
                 x_2 = minitorch.Scalar(x_2)
-                out = self.model.forward((x_1, x_2)) #type: ignore
+                out = self.model.forward((x_1, x_2))  # type: ignore
 
                 if y == 1:
                     prob = out
@@ -92,7 +91,7 @@ class ScalarTrain:
                     correct += 1 if out.data < 0.5 else 0
                 loss = -prob.log()
                 (loss / data.N).backward()
-                total_loss += loss.data #type: ignore
+                total_loss += loss.data  # type: ignore
 
             losses.append(total_loss)
 
@@ -109,4 +108,4 @@ if __name__ == "__main__":
     HIDDEN = 2
     RATE = 0.5
     data = minitorch.datasets["Simple"](PTS)
-    ScalarTrain(HIDDEN).train(data, RATE) #type: ignore
+    ScalarTrain(HIDDEN).train(data, RATE)  # type: ignore

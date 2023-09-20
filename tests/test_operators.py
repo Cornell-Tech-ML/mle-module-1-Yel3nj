@@ -112,7 +112,7 @@ def test_sigmoid(a: float) -> None:
     assert_close(sigmoid(0), 0.5)
     assert sigmoid(a) <= sigmoid(a + 0.1)
 
-    
+
 @pytest.mark.task0_2
 @given(small_floats, small_floats, small_floats)
 def test_transitive(a: float, b: float, c: float) -> None:
@@ -181,8 +181,8 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     """
     s = 0
     for i in range(len(ls1)):
-        s += ls1[i] #type: ignore
-        s += ls2[i] #type: ignore
+        s += ls1[i]  #type: ignore
+        s += ls2[i]  #type: ignore
     assert_close(sum(ls1) + sum(ls2), s)
 
 

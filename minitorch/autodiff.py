@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Iterable, List, Tuple
+from typing import Any, Iterable, Tuple
 
 from typing_extensions import Protocol
 
@@ -23,7 +23,7 @@ def central_difference(f: Any, *vals: Any, arg: int = 0, epsilon: float = 1e-6) 
         An approximation of $f'_i(x_0, \ldots, x_{n-1})$
     """
     vals_lst = list(vals)
-    
+
     vals_lst[arg] += epsilon
     forward = f(*vals_lst)
 
@@ -79,9 +79,10 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
         for parent in var.parents:
             DFS(parent)
         traversal.append(var)
-    
+
     DFS(variable)
     return reversed(traversal)
+
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
     """

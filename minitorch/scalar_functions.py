@@ -42,7 +42,7 @@ class ScalarFunction:
 
     @classmethod
     def _forward(cls, ctx: Context, *inps: float) -> float:
-        return cls.forward(ctx, *inps)  # type: ignore
+        return cls.forward(ctx, *inps)  #type: ignore
 
     @classmethod
     def apply(cls, *vals: "ScalarLike") -> Scalar:
