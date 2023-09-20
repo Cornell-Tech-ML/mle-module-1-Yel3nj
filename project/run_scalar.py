@@ -91,7 +91,7 @@ class ScalarTrain:
                     correct += 1 if out.data < 0.5 else 0
                 loss = -prob.log()
                 (loss / data.N).backward()
-                total_loss += loss.data  # type: ignore
+                total_loss += loss.data
 
             losses.append(total_loss)
 
