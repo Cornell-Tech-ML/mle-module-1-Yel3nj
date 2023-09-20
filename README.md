@@ -17,3 +17,13 @@ python sync_previous_module.py previous-module-dir current-module-dir
 The files that will be synced are:
 
         minitorch/operators.py minitorch/module.py tests/test_module.py tests/test_operators.py project/run_manual.py
+
+Training Logs & Graphs:
+![Split_1](https://github.com/Cornell-Tech-ML/mle-module-1-Yel3nj/assets/106493434/60cd5a49-39b8-48e1-96b7-2b488433fb1d)
+![Split_2(hidden3)](https://github.com/Cornell-Tech-ML/mle-module-1-Yel3nj/assets/106493434/bb736fea-beb5-4a08-bc0b-b72f3992744f)
+![Xor_1](https://github.com/Cornell-Tech-ML/mle-module-1-Yel3nj/assets/106493434/83b980b6-00fc-482d-ada2-791dc14d15bf)
+![Xor_2](https://github.com/Cornell-Tech-ML/mle-module-1-Yel3nj/assets/1064
+![Diag_1](https://github.com/Cornell-Tech-ML/mle-module-1-Yel3nj/assets/106493434/eaeade7a-7815-44c9-b7f6-69aa56dc75cf)
+![Diag_2](https://github.com/Cornell-Tech-ML/mle-module-1-Yel3nj/assets/106493434/235cf5aa-2441-4d37-aec0-d5a890cedfd1)
+![Circle_1](https://github.com/Cornell-Tech-ML/mle-module-1-Yel3nj/assets/106493434/67670423-93e6-4712-bf42-0f6ada0b0adc)
+![Circle_2(hidden4)](https://github.com/Cornell-Tech-ML/mle-module-1-Yel3nj/assets/106493434/2410373d-3812-4185-ba29-1deb278b3b17)
