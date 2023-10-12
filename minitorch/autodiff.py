@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Iterable, List, Tuple
+from typing import Any, Iterable, Tuple
 
 from typing_extensions import Protocol
 
@@ -22,8 +22,16 @@ def central_difference(f: Any, *vals: Any, arg: int = 0, epsilon: float = 1e-6) 
     Returns:
         An approximation of $f'_i(x_0, \ldots, x_{n-1})$
     """
-    # TODO: Implement for Task 1.1.
-    raise NotImplementedError("Need to implement for Task 1.1")
+    vals_lst = list(vals)
+
+    vals_lst[arg] += epsilon
+    forward = f(*vals_lst)
+
+    vals_lst[arg] -= 2 * epsilon
+    backward = f(*vals_lst)
+
+    difference = (forward - backward) / (2 * epsilon)
+    return difference
 
 
 variable_count = 1
@@ -61,8 +69,19 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     Returns:
         Non-constant Variables in topological order starting from the right.
     """
-    # TODO: Implement for Task 1.4.
-    raise NotImplementedError("Need to implement for Task 1.4")
+    visited = set()
+    traversal = []
+
+    def DFS(var: Variable) -> None:
+        if var.is_constant() or var.unique_id in visited:
+            return
+        visited.add(var.unique_id)
+        for parent in var.parents:
+            DFS(parent)
+        traversal.append(var)
+
+    DFS(variable)
+    return reversed(traversal)
 
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
@@ -76,8 +95,27 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
 
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
-    # TODO: Implement for Task 1.4.
-    raise NotImplementedError("Need to implement for Task 1.4")
+    topo_order = list(topological_sort(variable))
+
+    gradient_map = {variable.unique_id: deriv}
+
+    for var in topo_order:
+        current_gradient = gradient_map.get(var.unique_id)
+
+        if current_gradient is None or var.is_leaf():
+            continue
+
+        for parent, local_gradient in var.chain_rule(current_gradient):
+            if parent.is_constant():
+                continue
+            if parent.unique_id in gradient_map:
+                gradient_map[parent.unique_id] += local_gradient
+            else:
+                gradient_map[parent.unique_id] = local_gradient
+
+    for var in topo_order:
+        if var.is_leaf():
+            var.accumulate_derivative(gradient_map.get(var.unique_id, 0.0))
 
 
 @dataclass
